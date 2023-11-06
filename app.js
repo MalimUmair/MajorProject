@@ -86,7 +86,7 @@ app.use("/",userRoute);
 
 
 app.get("/",(req,res)=>{
-    res.redirect("/");
+    res.redirect("/listings");
 })
 
 // app.get("/testlistings", async (req,res)=>{
