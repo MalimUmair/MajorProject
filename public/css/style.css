@@ -123,5 +123,7 @@ a{
 @media (max-width:412px){
     .flash-mobile{
         width: 100%;
+        margin: 0;
+        
     }
 }
