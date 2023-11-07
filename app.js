@@ -89,7 +89,6 @@ app.get("/",(req,res)=>{
     res.redirect("/listings");
 })
 
-
 // app.get("/testlistings", async (req,res)=>{
 //     let list1 = new listing({
 //         title:"Abhishek sharma's villa",
