@@ -119,3 +119,9 @@ a{
     height: 400px;
     width: 90vh;
 }
+
+@media (max-width:412px){
+    .flash-mobile{
+        width: 100%;
+    }
+}

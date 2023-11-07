@@ -1,14 +1,43 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
+<style>
+    @media (max-width:412px){
+        #map{
+            width: 23rem;
+        }
+        .offset-3{
+            margin: 0;
+        }
+        .card{
+            width: 100%;
+            padding: 0 1rem;
+        }
+        .mobile-fit{
+            width: 100%;
+            padding: 0 1rem;
+        }
+        .mobile-fit-btn-div{
+            width: 100%;
+            display: flex;
+            gap: 3rem;
+            padding: 0 2rem
+        }
+        .mobile-fit-btn{
+            /* width: 100%; */
+            width: 5rem;
+        }
+    }
+</style>
+
 <script>
     const coordinates = <%- JSON.stringify(list.geometry.coordinates) %>
 </script>
 <body>
     <div class="row ">
-        <div class="col-8 offset-3 mt-3">            
+        <div class="col-8 offset-3 mt-3 mobile-fit">            
             <h3><b><%=list.title %></b></h3>
         </div>
-        <div class="card sh-card col-6 offset-3 listing-card">
+        <div class="card sh-card col-6  offset-3 listing-card ">
             <img src="<%=list.image.url%>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body">
                 <p>Owned By <i><%= list.owner.username %></i></p>
@@ -19,18 +48,18 @@
             </div>
         </div>
         <% if(currUser && currUser._id.equals(list.owner._id)){ %>
-        <div class="row sh-row mt-3 mb-3">
+        <div class="row sh-row mt-3 mb-3 mobile-fit-btn-div">
             <div class="col-2 offset-3">
-                <a href="/listings/<%=list._id%>/edit"><button class="btn btn-dark add-btn col-8">Edit</button></a>
+                <a href="/listings/<%=list._id%>/edit"><button class="btn btn-dark add-btn col-8 mobile-fit-btn">Edit</button></a>
             </div>
             <div class="col-2 ">
                 <form method="post" action="/listings/<%=list._id%>?_method=delete">
-                    <button class="btn btn-dark add-btn col-7">Delete</button>
+                    <button class="btn btn-dark add-btn col-7 mobile-fit-btn">Delete</button>
                 </form>
             </div>
         </div>
         <% } %>
-        <div class="col-8 sh-row offset-3 mb-3">
+        <div class="col-8 sh-row offset-3 mb-3 mobile-fit">
             <% if(currUser) {%>
             <hr>
             <form  method="post" action="/listings/<%=list._id%>/reviews"  novalidate class="needs-validation">
@@ -64,7 +93,7 @@
             <% } %>
         </div>
         <% if(list.reviews.length>0){ %>
-        <div class="row offset-3 sh-card col-8 mb-3">
+        <div class="row offset-3 sh-card col-8 mb-3 mobile-fit">
             <hr>
             <p><b>All reviews</b></p>
                 <% for(let review of list.reviews) {%>
@@ -85,7 +114,7 @@
                 <% } %> 
         </div>
         <% } %>
-        <div class="offset-3 sh-card col-8 mb-3">
+        <div class="offset-3 sh-card col-8 mb-3 mobile-fit">
             <hr>
             <h3>Where you'll be</h3>
             <div id="map"></div>

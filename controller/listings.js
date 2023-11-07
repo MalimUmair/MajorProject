@@ -1,10 +1,6 @@
 const listing = require("../models/listing.js");
 const axios = require('axios');
 
-const nominatim = require('nominatim-geocoder').NominatimCallback;
-
-const geocoder = new nominatim();
-
 
 
 module.exports.index = async (req,res)=>{
