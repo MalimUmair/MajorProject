@@ -27,9 +27,9 @@
             <div class="invalid-feedback">Short Description is required</div>
         </div>
         <br> 
-        <div>
+        <div >
             Preview Listing Image<br>
-            <img src="<%= originalUrl %>" alt="preview_img">
+            <img id="preview_img" src="<%= originalUrl %>" alt="preview_img">
         </div>
         <br> 
         <div>
@@ -44,11 +44,26 @@
             <div class="invalid-feedback">Price should be Valid</div>
 
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <label for="country" class="form-label">Country</label>
                 <input name="listing[country]" type="text" value="<%=list.country%>" class="form-control">
                 <div class="invalid-feedback" required>Country name should be Valid</div>
-
+            </div>
+            <div class="col-md-4">
+                <label for="country" class="form-label">Category</label>
+                <select name="listing[category]" class="form-select" required>
+                    <option value="">-Select Category-</option>
+                    <option value="trending">Trending</option>
+                    <option value="rooms">Rooms</option>
+                    <option value="iconic_cities">Iconic Cities</option>
+                    <option value="mountains">Mountains</option>
+                    <option value="artic">Artic</option>
+                    <option value="castles">Castles</option>
+                    <option value="beaches">Beaches</option>
+                    <option value="camping">Camping</option>
+                    <option value="farms">Farms</option>
+                </select>
+                <div class="invalid-feedback">Please Select Category</div>
             </div>
         </div>
         <br>

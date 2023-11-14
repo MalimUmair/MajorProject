@@ -31,8 +31,12 @@ let listingSchema = new schema({
         },
         coordinates:{
             type:[Number],
-            require:true
+            required:true
         }
+    },
+    category:{
+        type:String,
+        required:true
     }
 })
 

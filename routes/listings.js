@@ -12,9 +12,9 @@ const upload = multer({ storage });
 router.route("/")
 .get(wrapAsync(listingController.index))
 .post(isLoggedIn,upload.single('listing[image]'),validateListing,wrapAsync(listingController.createListing));
-// .post(isLoggedIn,upload.single('listing[image]'),wrapAsync(listingController.createListing));
-// .post(isLoggedIn,upload.single('listing[image]'),(req,res)=>{
-//     res.send(req.file);
+// .post(upload.single('listing[image]'),wrapAsync(listingController.createListing));
+// .post(upload.single('listing[image]'),(req,res)=>{
+//     res.send(req.body);
 // });
 
 //index route
@@ -23,6 +23,8 @@ router.route("/")
 router.get("/new",isLoggedIn,listingController.renderNewForm);
 
 
+router.get("/category/:cate",listingController.category);
+router.post("/destination",listingController.searchPlace);
 
 // show route
 router.get("/:id", wrapAsync(listingController.showListings));

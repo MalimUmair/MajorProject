@@ -85,6 +85,8 @@ app.use("/listings/:id/reviews",reviewsRoute);
 app.use("/",userRoute);
 
 
+app.get("/listings/category/:cat",listingsRoute);
+
 app.get("/",(req,res)=>{
     res.redirect("/listings");
 })
@@ -122,6 +124,7 @@ app.all("*",(req,res,next)=>{
 app.use((err,req,res,next)=>{
     let{statusCode=500,message="Something went wrong"} = err;
     // res.status(statusCode).send(message);
+    console.log(err);
     res.status(statusCode).render("error.ejs",{message});
 })
 

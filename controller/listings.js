@@ -8,11 +8,36 @@ module.exports.index = async (req,res)=>{
     res.render("./listings/index.ejs",{allListings});
 }
 
+module.exports.category = async(req,res)=>{
+    let {cate} = req.params;
+    const allListings = await listing.find({category:cate});
+    if(allListings.length!=0){
+        res.render("./listings/index.ejs",{allListings});
+    }else{
+        req.flash("error","This category does not have any listing");
+        res.redirect("/listings");
+    }
+}
+
+module.exports.searchPlace = async(req,res)=>{
+    let {place} = req.body;
+    let arr = place.split(",");
+    const allList = await listing.find();
+    let allListings = allList.filter((list)=>list.location.split(",")[0] === arr[0]);
+    if(allListings.length!=0){
+        res.render("./listings/index.ejs",{allListings});
+    }else{
+        req.flash("error","This Destination does not have any listing");
+        res.redirect("/listings");
+    }
+}
+
 module.exports.renderNewForm = (req,res)=>{
     res.render("./listings/new.ejs");
 }
 
 module.exports.createListing =async (req,res)=>{
+    console.log(req.body);
     let url = req.file.path;
     let filename = req.file.filename;
     const newList = new listing(req.body.listing);
@@ -55,12 +80,20 @@ module.exports.updateListing = async (req,res)=>{
     let {id} = req.params;
     let list = await listing.findByIdAndUpdate(id,{...req.body.listing});
     
+    let locate = list.location;
+    let locationiqUrl = `https://us1.locationiq.com/v1/search?key=${process.env.LOCATION_API_KEY}&q=${locate}&format=json`;
+    let addresscoord = await axios.get(locationiqUrl);
+    let coords = addresscoord.data[0];
+    list.geometry.coordinates[0] = coords.lat;
+    list.geometry.coordinates[1] = coords.lon;
+    await list.save();
 
     if(typeof req.file !== "undefined"){
         let url = req.file.path;
         let filename = req.file.filename;
         list.image = {url,filename};
         await list.save();
+
     }
     req.flash("success","listing UPDATED :)");
     res.redirect(`/listings/${id}`);
