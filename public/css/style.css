@@ -126,8 +126,17 @@ a{
         margin: 0;
         
     }
+<<<<<<< HEAD
 }
 
 #preview_img{
     height: 200px;
 }
+=======
+    .mobile-fit{
+        width: 100%;
+        padding: 0 1rem;
+        margin: 0;
+    }
+}
+>>>>>>> 2b365f9e5b7b7efb055951f2324f89168049ae8f
