@@ -4,6 +4,8 @@
 
 This is repository of FullStack website Wanderlust with Nodejs, Expressjs, MongoDB
 
+```git clone https://github.com/abhisheksharma8630/Wanderlust_MegaProject.git```
+
 Features:
 - Full responsiveness
 - Credential Authentication
