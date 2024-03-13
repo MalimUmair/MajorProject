@@ -43,16 +43,37 @@ module.exports.createListing =async (req,res)=>{
     const newList = new listing(req.body.listing);
     newList.owner = req.user._id;
     newList.image = {url,filename};
-    let locate = newList.location;
-    let locationiqUrl = `https://us1.locationiq.com/v1/search?key=${process.env.LOCATION_API_KEY}&q=${locate}&format=json`;
-    let addresscoord = await axios.get(locationiqUrl);
-    let coords = addresscoord.data[0];
-    newList.geometry.coordinates[0] = coords.lat;
-    newList.geometry.coordinates[1] = coords.lon;
+    // let locate = newList.location;
+    // let locationiqUrl = `https://us1.locationiq.com/v1/search?key=${process.env.LOCATION_API_KEY}&q=${locate}&format=json`;
+    // let addresscoord = await axios.get(locationiqUrl);
+    // let coords = addresscoord.data[0];
+    // newList.geometry.coordinates[0] = coords.lat;
+    // newList.geometry.coordinates[1] = coords.lon;
     let savedList = await newList.save();
+    console.log(savedList);
     req.flash("success","New listing created successfully !");
     res.redirect("/listings");      
 }
+// ==================
+// module.exports.createListing = async (req, res, next) => {
+    // let response = await geocodingClient
+    //   .forwardGeocode({
+    //     query: req.body.listing.location,
+    //     limit: 1,
+    //   })
+    //   .send();
+  
+//     let url = req.file.path;
+//     let filename = req.file.filename;
+//     const newListing = new Listing(req.body.listing);
+//     newListing.owner = req.user._id;
+//     newListing.image = { url, filename };
+//     // newListing.geometry = response.body.features[0].geometry;
+//     await newListing.save();
+  
+//     req.flash("success", "New listing Created");
+//     res.redirect("/listings");
+//   };
 
 module.exports.showListings =async (req,res)=>{
     let {id} = req.params;
@@ -80,13 +101,13 @@ module.exports.updateListing = async (req,res)=>{
     let {id} = req.params;
     let list = await listing.findByIdAndUpdate(id,{...req.body.listing});
     
-    let locate = list.location;
-    let locationiqUrl = `https://us1.locationiq.com/v1/search?key=${process.env.LOCATION_API_KEY}&q=${locate}&format=json`;
-    let addresscoord = await axios.get(locationiqUrl);
-    let coords = addresscoord.data[0];
-    list.geometry.coordinates[0] = coords.lat;
-    list.geometry.coordinates[1] = coords.lon;
-    await list.save();
+    // let locate = list.location;
+    // let locationiqUrl = `https://us1.locationiq.com/v1/search?key=${process.env.LOCATION_API_KEY}&q=${locate}&format=json`;
+    // let addresscoord = await axios.get(locationiqUrl);
+    // let coords = addresscoord.data[0];
+    // list.geometry.coordinates[0] = coords.lat;
+    // list.geometry.coordinates[1] = coords.lon;
+    // await list.save();
 
     if(typeof req.file !== "undefined"){
         let url = req.file.path;
@@ -98,6 +119,23 @@ module.exports.updateListing = async (req,res)=>{
     req.flash("success","listing UPDATED :)");
     res.redirect(`/listings/${id}`);
 }
+
+// =====================
+// module.exports.updateListings = async (req, res) => {
+//     let { id } = req.params;
+  
+//     let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  
+//     if (typeof req.file != "undefined") {
+//       let url = req.file.path;
+//       let filename = req.file.filename;
+//       listing.image = { url, filename };
+//       await listing.save();
+//     }
+  
+//     req.flash("success", "Listing Updated");
+//     res.redirect(`/listings/${id}`);
+//   };
 
 module.exports.destroyListing = async (req,res)=>{
     let{id} = req.params;

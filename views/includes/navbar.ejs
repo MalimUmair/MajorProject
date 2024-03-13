@@ -42,7 +42,11 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav navbar-nav-scroll">
           <a class="nav-link" href="/listings"><b>Explore</b></a>
+          <a class="nav-link" href="/listings"><b>Stays</b></a>
+          <a class="nav-link" href="/listings"><b>Experiance</b></a>
+          
         </div>
+    
         <div class="navbar-nav ms-auto search-cont">
           <form class="d-flex" role="search" method="post" action="/listings/destination">
             <input class="form-control me-2 search-inp" type="search" name="place" placeholder="Search Destinations">
@@ -50,7 +54,7 @@
           </form>
         </div>
         <div class="navbar-nav ms-auto navbar-nav-scroll">
-          <a class="nav-link" href="/listings/new">Airbnb your home</a>
+          <a class="nav-link" href="/listings/new">Add New Listing </a>
           <% if(!currUser) {%>
             <a class="nav-link" aria-current="page" href="/signup"><b>SignUp</b></a>
             <a class="nav-link" href="/login"><b>Login</b></a>
