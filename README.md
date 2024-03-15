@@ -5,7 +5,6 @@
 This is repository of FullStack website Wanderlust with Nodejs, Expressjs, MongoDB
 
 
-### Cloning the Repository
 
 ```shell
 
